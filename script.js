@@ -18,12 +18,17 @@ fetch(basePath + "seminars.json")
       card.className = "seminar-card";
 
       card.innerHTML = `
-        <img src="${basePath + seminar.photo}" class="speaker-photo" alt="${seminar.speaker}">
-        <h3>${seminar.name}</h3>
-        <p><strong>Speaker:</strong> ${seminar.speaker}</p>
-        <p><strong>Date:</strong> ${new Date(seminar.date).toLocaleString()}</p>
-        <p>${seminar.short_abstract}</p>
-        <p><em>Click to read more</em></p>
+        <div>
+          <h3>${seminar.name}</h3>
+          <p><strong>Speaker:</strong> ${seminar.speaker}</p>
+          <p><strong>Date:</strong> ${new Date(seminar.date).toLocaleString()}</p>
+          <p>${seminar.short_abstract}</p>
+          <p><em>Click to read more</em></p>
+        </div>
+      
+        <img src="${basePath + seminar.photo}" 
+             class="speaker-photo" 
+             alt="${seminar.speaker}">
       `;
 
       card.onclick = () => openModal(seminar, basePath);
