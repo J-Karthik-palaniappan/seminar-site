@@ -35,7 +35,7 @@ main {
   background: white;
   border-radius: 10px;
   padding: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.30);
 
   display: flex;               /* <-- KEY CHANGE */
   align-items: center;         /* vertical centering */
@@ -48,6 +48,7 @@ main {
 /* Put image on the right */
 .seminar-card img {
   margin-left: auto;           /* pushes photo to the right */
+  margin-right: 6px;
 }
 
 /* Speaker photo */
