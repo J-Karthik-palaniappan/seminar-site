@@ -6,14 +6,6 @@ body {
   line-height: 1.6;
 }
 
-/* Prevent long words from breaking layout */
-main, .seminar-card {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-}
-
-/* Header */
 header {
   background: #003366;
   color: white;
@@ -21,7 +13,6 @@ header {
   text-align: center;
 }
 
-/* Navigation bar */
 nav {
   background: white;
   padding: 12px;
@@ -36,23 +27,73 @@ nav a {
   font-weight: 600;
 }
 
-/* Main content area */
+/* Layout */
 main {
-  max-width: 900px;
+  max-width: 960px;
   margin: 24px auto;
   padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
 }
 
-/* Seminar card */
+/* Clickable seminar card */
 .seminar-card {
   background: white;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 16px;
-  margin-top: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
 }
 
-/* Footer */
+.seminar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+/* Speaker photo */
+.speaker-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* MODAL (overlay detail view) */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 footer {
   margin-top: 40px;
   padding: 14px;
