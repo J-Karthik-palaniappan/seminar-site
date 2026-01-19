@@ -30,33 +30,36 @@ main {
   gap: 16px;
 }
 
-/* Horizontal seminar card */
+/* Seminar card */
+/* Seminar card */
 .seminar-card {
   background: white;
   border-radius: 10px;
   padding: 16px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 
-  display: flex;               /* <-- KEY CHANGE */
-  align-items: center;         /* vertical centering */
-  gap: 16px;                   /* space between text and photo */
+  display: flex;          /* NEW */
+  align-items: center;    /* NEW */
+  gap: 16px;              /* NEW */
 
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   cursor: pointer;
 }
 
-/* Put image on the right */
-.seminar-card img {
-  margin-left: auto;           /* pushes photo to the right */
+.seminar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
 }
 
 /* Speaker photo */
 .speaker-photo {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  flex-shrink: 0;              /* prevents image from shrinking */
+  margin-bottom: 10px;
+
+  margin-left: auto;   /* NEW: this moves the image to the right */
 }
 
 /* Modal overlay */
