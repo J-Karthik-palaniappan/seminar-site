@@ -64,3 +64,8 @@ function openModal(seminar, basePath) {
 function closeModal() {
   document.getElementById("seminarModal").classList.remove("active");
 }
+
+document.getElementById("seminarModal").addEventListener("click", closeModal);
+document.querySelector(".modal-content").addEventListener("click", e => {
+  e.stopPropagation();
+});

@@ -1,32 +1,68 @@
-body {
+body { 
+  min-height: 100vh;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   margin: 0;
   background: #f5f7fa;
   color: #1f2937;
   line-height: 1.6;
-}
 
-header {
-  background: #003366;
-  color: white;
-  padding: 24px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 nav {
   background: white;
-  padding: 12px;
-  text-align: center;
+  padding: 12px 100px;   /* extra left padding */
+  text-align: left;     /* <-- aligns items left */
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+nav a {
+  margin-right: 20px;   /* spacing between links */
+  text-decoration: none;
+  color: #003366;
+  font-weight: 600;
+
+  /* underline animation setup */
+  position: relative;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: #003366;
+  transition: width 0.3s ease;   /* slow animation */
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #003366;
+  color: white;
+  padding: 20px 50px;
+}
+
+.logo {
+  height: 120px;
+  width: auto;
 }
 
 /* Grid layout for cards */
 main {
-  max-width: 960px;
-  margin: 24px auto;
+  /* max-width: 960px; */
+  margin: 24px 100px;
   padding: 16px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 
@@ -48,7 +84,7 @@ main {
 /* Put image on the right */
 .seminar-card img {
   margin-left: auto;           /* pushes photo to the right */
-  margin-right: 6px;
+  margin-right: 10%;
 }
 
 /* Speaker photo */
@@ -58,6 +94,12 @@ main {
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;              /* prevents image from shrinking */
+}
+
+.section-label {
+  color: #003366;      /* institutional blue */
+  font-size: 20px;
+  margin: 20px 100px -10px;
 }
 
 /* Modal overlay */
@@ -94,9 +136,33 @@ main {
 }
 
 footer {
-  margin-top: 40px;
+  margin-top: auto;
   padding: 14px;
   background: #003366;
   color: white;
   text-align: center;
+}
+
+@media (max-width: 1100px) {
+
+  .seminar-card {
+    flex-direction: column;   /* stack photo on top */
+    align-items: flex-start;  /* align text left */
+  }
+
+  .seminar-card img {
+    order: -1;
+    margin-left: 0;           /* remove right push */
+    margin-bottom: 12px;      /* space below photo */
+  }
+}
+@media (max-width: 700px) {
+
+  main {
+    grid-template-columns: 1fr;  /* single column */
+  }
+
+  .seminar-card {
+    flex-direction: column;
+  }
 }
