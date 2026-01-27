@@ -1,8 +1,6 @@
-const basePath = window.location.pathname.endsWith("/")
-  ? window.location.pathname
-  : window.location.pathname + "/";
+const basePath = "/";
 
-fetch(basePath + "seminars.json")
+fetch(basePath + "data/seminars.json")
   .then(res => {
     if (!res.ok) {
       throw new Error("Cannot load seminars.json");
@@ -17,13 +15,20 @@ fetch(basePath + "seminars.json")
     featuredDiv.innerHTML = `
       <img 
         src="${basePath + featured.thumbnail}" 
-        class="featured-poster" 
-        alt="Seminar Poster">
+        class="featured-poster"
+        alt="Seminar Poster"
+        style="cursor: pointer;"
+      >
 
       <div class="featured-content">
         <div class="featured-title">${featured.name}</div>
 
-        <div class="featured-speaker">
+        <a 
+          class="featured-speaker"
+          href="${featured.speaker_url}"
+          target="_blank"
+          onclick="event.stopPropagation()"
+        >
           <img 
             src="${basePath + featured.photo}" 
             alt="${featured.speaker}">
@@ -34,14 +39,29 @@ fetch(basePath + "seminars.json")
               ${new Date(featured.date).toLocaleString()} · ${featured.venue}
             </div>
           </div>
-        </div>
+        </a>
+
+        ${featured.youtube_url
+        ? `<a
+            href="${featured.youtube_url}"
+            target="_blank"
+            class="youtube-cta"
+            onclick="event.stopPropagation()"
+          >
+            ▶ YouTube
+          </a>`
+        : ""
+        }
 
         <div class="featured-abstract">
           ${featured.short_abstract}
         </div>
       </div>
     `;
-    featuredDiv.onclick = () => openModal(featured, basePath);
+    
+    // modal opening
+    const poster = featuredDiv.querySelector(".featured-poster");
+    poster.addEventListener("click", () => openModal(featured, basePath));
 
     // seminar cards
     const container = document.getElementById("seminarContainer");
@@ -74,26 +94,41 @@ fetch(basePath + "seminars.json")
       "<p style='color:red'>Error loading seminars.json. Check console (F12).</p>";
   });
 
-function openModal(seminar, basePath) {
-  document.getElementById("modalTitle").innerText = seminar.name;
-  document.getElementById("modalSpeaker").innerText = "Speaker: " + seminar.speaker;
-  document.getElementById("modalDate").innerText =
-    "Date: " + new Date(seminar.date).toLocaleString();
-  document.getElementById("modalVenue").innerText = "Venue: " + seminar.venue;
-  document.getElementById("modalFull").innerText = seminar.full_content;
+function openModal(seminar) {
+  const pdfScroll = document.getElementById("pdfScroll");
+  pdfScroll.innerHTML = "";
 
-  const linksDiv = document.getElementById("modalLinks");
-  linksDiv.innerHTML = `
-    <h4>Links</h4>
-    <ul>
-      <li><a href="${seminar.links.homepage}" target="_blank">Homepage</a></li>
-      <li><a href="${seminar.links.google_scholar}" target="_blank">Google Scholar</a></li>
-      <li><a href="${seminar.links.zoom}" target="_blank">Join Zoom</a></li>
-    </ul>
-  `;
+  seminar.images.forEach(src => {
+    const img = document.createElement("img");
+    img.src = src;
+    pdfScroll.appendChild(img);
+  });
 
+  document.getElementById("youtubeLink").href = seminar.youtube_url;
   document.getElementById("seminarModal").classList.add("active");
 }
+
+
+// function openModal(seminar, basePath) {
+//   document.getElementById("modalTitle").innerText = seminar.name;
+//   document.getElementById("modalSpeaker").innerText = "Speaker: " + seminar.speaker;
+//   document.getElementById("modalDate").innerText =
+//     "Date: " + new Date(seminar.date).toLocaleString();
+//   document.getElementById("modalVenue").innerText = "Venue: " + seminar.venue;
+//   document.getElementById("modalFull").innerText = seminar.full_content;
+
+//   const linksDiv = document.getElementById("modalLinks");
+//   linksDiv.innerHTML = `
+//     <h4>Links</h4>
+//     <ul>
+//       <li><a href="${seminar.links.homepage}" target="_blank">Homepage</a></li>
+//       <li><a href="${seminar.links.google_scholar}" target="_blank">Google Scholar</a></li>
+//       <li><a href="${seminar.links.zoom}" target="_blank">Join Zoom</a></li>
+//     </ul>
+//   `;
+
+//   document.getElementById("seminarModal").classList.add("active");
+// }
 
 function closeModal() {
   document.getElementById("seminarModal").classList.remove("active");

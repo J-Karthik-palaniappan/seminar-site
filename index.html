@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>INFER</title>
   <link rel="icon" type="image/x-icon" href="images/iitm_logo.png">
-  <link rel="stylesheet" href="styles_compact.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <nav>
-  <a href="#">Home</a>
-  <a href="#">Seminars</a>
-  <a href="#">Schedule</a>
-  <a href="#">Contact</a>
+  <a href="/">Home</a>
+  <a href="/#seminars">Seminars</a>
+  <a href="/team">Team</a>
 </nav>
 
 <header class="header-bar">
@@ -33,19 +32,14 @@
 <!-- Modal -->
 <div id="seminarModal" class="modal">
   <div class="modal-content">
-
-    <h2 id="modalTitle"></h2>
-    <p id="modalSpeaker"></p>
-    <p id="modalDate"></p>
-    <p id="modalVenue"></p>
-    <p id="modalFull"></p>
-
-    <div id="modalLinks"></div>
+    <a id="youtubeLink" href="#" target="_blank" style="display:block;">
+      <div class="pdf-scroll" id="pdfScroll"></div>
+    </a>
   </div>
 </div>
 
 <footer>
-  Contact: seminars@yourinstitution.edu
+  Contact: ee.iitm.ac.in
 </footer>
 
 <script src="script.js"></script>

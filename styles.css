@@ -1,10 +1,11 @@
-body { 
+/*========================BASE========================*/
+body {
   min-height: 100vh;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   margin: 0;
   background: #f5f7fa;
   color: #1f2937;
-  line-height: 1.6;
+  line-height: 1.45;
 
   display: flex;
   flex-direction: column;
@@ -12,26 +13,22 @@ body {
 
 main,
 .section-label {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 /*========================NAV========================*/
 nav {
   background: white;
-  padding: 12px 5%;
-  text-align: left;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  padding: 15px 6%;
 }
 
 nav a {
-  margin-right: 20px;   /* spacing between links */
+  margin-right: 30px;
   text-decoration: none;
   color: #003366;
   font-weight: 600;
-
-  /* underline animation setup */
+  font-size: 14px;
   position: relative;
 }
 
@@ -39,11 +36,11 @@ nav a::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -3px;
+  bottom: -2px;
   width: 0;
   height: 2px;
   background: #003366;
-  transition: width 0.3s ease;   /* slow animation */
+  transition: width 0.2s ease;
 }
 
 nav a:hover::after {
@@ -54,60 +51,186 @@ nav a:hover::after {
 .header-bar {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 15px;
   background: #003366;
   color: white;
-  padding: 20px 5%;
+  padding: 20px 4%;
+}
+
+.header-bar h1 {
+  font-size: 25px;
+  margin: 0;
 }
 
 .logo {
   height: 100px;
-  width: auto;
 }
 
-/*========================CARD========================*/
-main {
-  margin: 24px auto;
-  padding: 16px 5%;
+.introduction {
+  margin: 20px 8.5%;
+  padding: 10px 4%;
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #232f43;
+}
+
+/*========================SECTION LABEL========================*/
+.section-label {
+  font-size: 20px;
+  /* font-weight: 600; */
+  color: #003366;
+  margin: 16px 7%;
+  padding: 10px 4%;
+}
+
+.section-divider {
+  content: "";
+  display: block;
+  width: 70%;
+  height: 2px;
+  margin: 28px auto;
+  background-color: #d1d5db; /* neutral gray */
+}
+
+/*========================FEATURED SEMINAR (OPEN LAYOUT)========================*/
+.featured-seminar {
+  max-width: 1280px;
+  margin: 0 auto 24px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: 1fr 520px;
+  gap: 32px;
+}
+
+/* Thumbnail on RIGHT */
+.featured-poster {
+  width: 600px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Text block */
+.featured-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Title slightly lower than center */
+.featured-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #003366;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+
+/* Speaker more prominent */
+.featured-speaker {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 16px;    /* slightly bigger */
+}
+.featured-speaker:hover{
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.featured-speaker img {
+  width: 100px;        /* bigger speaker image */
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Meta stays subtle */
+.featured-meta {
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Abstract unchanged */
+.featured-abstract {
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 88%;
+}
+
+/* Video link unchanged */
+.featured-video-link {
+  margin-top: 10px;
+}
+
+.youtube-cta {
+  display: inline-block;
+  margin: 10px 0 15px;
+  padding: 5px 10px;
+  background: #c62828;
+  color: #fff;
+  font-weight: 400;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.youtube-cta:hover {
+  background: #b71c1c;
+}
+
+/*========================CARDS========================*/
+main {
+  padding: 24px 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
 
 .seminar-card {
   background: white;
-  border-radius: 10px;
-  padding: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.30);
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
 
-  display: flex;               /* <-- KEY CHANGE */
-  align-items: center;         /* vertical centering */
-  gap: 16px;                   /* space between text and photo */
+  display: flex;
+  align-items: center;
+  gap: 12px;
 
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
   cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.seminar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+}
+
+.seminar-card h3 {
+  font-size: 16px;
+  margin: 0 0 4px;
+}
+
+.seminar-card p {
+  font-size: 14px;
+  margin: 2px 0;
 }
 
 .seminar-card img {
-  margin-left: auto;           /* pushes photo to the right */
-  margin-right: 10%;
+  margin-left: auto;
 }
 
 .speaker-photo {
-  width: 90px;
-  height: 90px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   object-fit: cover;
-  flex-shrink: 0;              /* prevents image from shrinking */
+  flex-shrink: 0;
 }
 
-.section-label {
-  color: #003366;      /* institutional blue */
-  margin: 20px auto -10px;
-  padding: 0 5%;
-}
-
-/* Modal overlay */
+/*========================MODAL========================*/
 .modal {
   position: fixed;
   inset: 0;
@@ -124,50 +247,198 @@ main {
 
 .modal-content {
   background: white;
-  width: 90%;
-  max-width: 600px;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  position: relative;
+  max-width: 1200px;
+  width: 60%;
+  border-radius: 10px;
 }
 
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  font-size: 20px;
-  cursor: pointer;
+.pdf-scroll {
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
+.pdf-scroll img {
+  width: 100%;
+  display: block;
+  margin-bottom: 12px;
+  border-radius: 6px;
+}
+
+/*========================FOOTER========================*/
 footer {
   margin-top: auto;
-  padding: 14px;
+  padding: 10px;
   background: #003366;
   color: white;
+  font-size: 13px;
   text-align: center;
 }
 
-@media (max-width: 1100px) {
+/*========================TEAM========================*/
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
 
+.team-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  gap: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.team-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.team-links a {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+
+/*========================RESPONSIVE========================*/
+@media (max-width: 1199px) {
+
+  /* HEADER */
+  .header-bar {
+    padding: 18px 5%;
+  }
+
+  .logo {
+    height: 80px;
+  }
+
+  /* FEATURED SEMINAR */
+  .featured-seminar {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 0 5%;
+  }
+
+  .featured-poster {
+    width: clamp(320px, 80vw, 520px);
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .featured-title {
+    font-size: 24px;
+    margin-top: 0;
+  }
+
+  .featured-abstract {
+    max-width: 100%;
+  }
+
+  /* MAIN GRID */
+  main {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px;
+  }
+
+  /* CARDS */
   .seminar-card {
-    flex-direction: column;   /* stack photo on top */
-    align-items: flex-start;  /* align text left */
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .speaker-photo {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media (max-width: 767px) {
+
+  /* HEADER */
+  .header-bar {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    padding: 16px 4%;
+  }
+
+  .logo {
+    height: 70px;
+  }
+
+  .introduction {
+    margin: 16px 4%;
+    padding: 0;
+    font-size: 15px;
+  }
+
+  /* FEATURED SEMINAR */
+  .featured-seminar {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 4%;
+  }
+
+  .featured-poster {
+    width: clamp(280px, 90vw, 520px);
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .featured-title {
+    font-size: 21px;
+  }
+
+  .featured-speaker img {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* MAIN GRID */
+  main {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  /* CARDS */
+  .seminar-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 
   .seminar-card img {
     order: -1;
-    margin-left: 0;           /* remove right push */
-    margin-bottom: 12px;      /* space below photo */
+    margin-left: 0;
+  }
+
+  .speaker-photo {
+    width: 72px;
+    height: 72px;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 420px) {
 
-  main {
-    grid-template-columns: 1fr;  /* single column */
+  .featured-title {
+    font-size: 19px;
   }
 
-  .seminar-card {
-    flex-direction: column;
+  .featured-abstract {
+    font-size: 14px;
+  }
+
+  .featured-poster {
+    min-width: 280px;
+  }
+
+  .seminar-card h3 {
+    font-size: 15px;
+  }
+
+  .seminar-card p {
+    font-size: 13px;
   }
 }
