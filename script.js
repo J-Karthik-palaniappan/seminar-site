@@ -1,4 +1,6 @@
-const basePath = "/";
+const basePath = window.location.pathname.endsWith("/")
+  ? window.location.pathname
+  : window.location.pathname + "/";
 
 fetch(basePath + "data/seminars.json")
   .then(res => {
