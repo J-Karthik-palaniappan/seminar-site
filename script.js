@@ -19,7 +19,6 @@ fetch(basePath + "data/seminars.json")
         src="${basePath + featured.thumbnail}" 
         class="featured-poster"
         alt="Seminar Poster"
-        style="cursor: pointer;"
       >
 
       <div class="featured-content">
@@ -58,12 +57,24 @@ fetch(basePath + "data/seminars.json")
         <div class="featured-abstract">
           ${featured.short_abstract}
         </div>
+        <span class="read-more">Read more ▾</span>
       </div>
     `;
     
     // modal opening
     const poster = featuredDiv.querySelector(".featured-poster");
     poster.addEventListener("click", () => openModal(featured, basePath));
+
+    // readmore
+    featuredDiv.querySelector(".read-more").onclick = function() {
+      const abs = featuredDiv.querySelector(".featured-abstract");
+      abs.classList.toggle("expanded");
+
+      this.textContent =
+        abs.classList.contains("expanded")
+          ? "Read less ▲"
+          : "Read more ▾";
+    };
 
     // seminar cards
     const container = document.getElementById("seminarContainer");

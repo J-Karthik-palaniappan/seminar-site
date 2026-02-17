@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Jessica Dobrev",
+    "title": "Backend Lead",
+    "image": "images/team/dummy.jpg"
+  },
+  {
+    "name": "Drew Cano",
+    "title": "Head of UX",
+    "image": "images/team/dummy.jpg"
+  },
+  {
+    "name": "Sasha Kindred",
+    "title": "VP of Marketing",
+    "image": "images/team/dummy.jpg"
+  },
+  {
+    "name": "Emily Donnavan",
+    "title": "Product Lead",
+    "image": "images/team/dummy.jpg"
+  },
+  {
+    "name": "Orlando Diggs",
+    "title": "Co-Founder and COO",
+    "image": "images/team/dummy.jpg"
+  },
+  {
+    "name": "Sophie Chamberlain",
+    "title": "Head of Sales",
+    "image": "images/team/dummy.jpg"
+  },
+  {
+    "name": "Lana Steiner",
+    "title": "VP of Customer Success",
+    "image": "images/team/dummy.jpg"
+  },
+  {
+    "name": "Emmy Rosum",
+    "title": "Co-Founder and CEO",
+    "image": "images/team/dummy.jpg"
+  }
+]
