@@ -2,6 +2,27 @@ const basePath = window.location.pathname.endsWith("/")
   ? window.location.pathname
   : window.location.pathname + "/";
 
+const dateOpts = {
+  weekday: "short",
+  month: "short",
+  day: "numeric",
+  hour: "numeric",
+  minute: "2-digit",
+  timeZoneName: "short",
+};
+
+function escapeHtml(str = "") {
+  return String(str).replace(/[&<>"']/g, ch => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[ch]);
+}
+
+function safeAbstract(text = "") {
+  const truncated = text.length > 300 ? text.slice(0, 300) + "…" : text;
+  return escapeHtml(truncated);
+}
+
+
 fetch(basePath + "data/seminars.json")
   .then(res => {
     if (!res.ok) {
@@ -85,20 +106,30 @@ fetch(basePath + "data/seminars.json")
       card.className = "seminar-card";
 
       card.innerHTML = `
-        <div>
+        <div class="card-left">
           <h3>${seminar.name}</h3>
-          <p><strong>Speaker:</strong> ${seminar.speaker}</p>
-          <p><strong>Date:</strong> ${new Date(seminar.date).toLocaleString()}</p>
-          <p>${seminar.short_abstract}</p>
-          <p><em>Click to read more</em></p>
+          <p class="card-date">${new Date(seminar.date).toLocaleString(undefined, dateOpts)}</p>
+          <p class="card-abstract clamp" data-full="${escapeHtml(seminar.short_abstract)}">
+            ${safeAbstract(seminar.short_abstract)}
+          </p>
+          <button class="read-more" type="button">Read more</button>
         </div>
-      
-        <img src="${basePath + seminar.photo}" 
-             class="speaker-photo" 
-             alt="${seminar.speaker}">
+        <div class="card-right">
+          <a href="${seminar.speaker_url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
+            <img src="${basePath + seminar.photo}" class="speaker-photo" alt="${seminar.speaker}" loading="lazy">
+          </a>
+          <div class="card-speaker">${seminar.speaker}</div>
+          ${seminar.youtube_url ? `<a class="youtube-cta" href="${seminar.youtube_url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">▶</a>` : ""}
+        </div>
       `;
 
-      card.onclick = () => openModal(seminar, basePath);
+      // card.onclick = () => openModal(seminar, basePath);
+      const readBtn = card.querySelector(".read-more");
+        readBtn.addEventListener("click", e => {
+          e.stopPropagation();
+          openModal(seminar, basePath);
+      });
+
       container.appendChild(card);
     });
   })
@@ -106,6 +137,7 @@ fetch(basePath + "data/seminars.json")
     document.getElementById("seminarContainer").innerHTML =
       "<p style='color:red'>Error loading seminars.json. Check console (F12).</p>";
   });
+
 
 function openModal(seminar) {
   const pdfScroll = document.getElementById("pdfScroll");
@@ -120,28 +152,6 @@ function openModal(seminar) {
   document.getElementById("youtubeLink").href = seminar.youtube_url;
   document.getElementById("seminarModal").classList.add("active");
 }
-
-
-// function openModal(seminar, basePath) {
-//   document.getElementById("modalTitle").innerText = seminar.name;
-//   document.getElementById("modalSpeaker").innerText = "Speaker: " + seminar.speaker;
-//   document.getElementById("modalDate").innerText =
-//     "Date: " + new Date(seminar.date).toLocaleString();
-//   document.getElementById("modalVenue").innerText = "Venue: " + seminar.venue;
-//   document.getElementById("modalFull").innerText = seminar.full_content;
-
-//   const linksDiv = document.getElementById("modalLinks");
-//   linksDiv.innerHTML = `
-//     <h4>Links</h4>
-//     <ul>
-//       <li><a href="${seminar.links.homepage}" target="_blank">Homepage</a></li>
-//       <li><a href="${seminar.links.google_scholar}" target="_blank">Google Scholar</a></li>
-//       <li><a href="${seminar.links.zoom}" target="_blank">Join Zoom</a></li>
-//     </ul>
-//   `;
-
-//   document.getElementById("seminarModal").classList.add("active");
-// }
 
 function closeModal() {
   document.getElementById("seminarModal").classList.remove("active");

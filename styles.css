@@ -229,28 +229,39 @@ main {
   display: flex;
   align-items: center;
   gap: 12px;
-
+}
+.card-left { display: flex; flex-direction: column; gap: 8px; }
+.card-left .card-date { color: #4b5563; font-size: 13px; margin: 0; }
+.card-left .card-abstract { margin: 0; color: #374151; font-size: 14px; margin: 2px 0;}
+.card-left .read-more {
+  align-self: flex-start;
+  background: transparent;
+  border: 0;
+  color: #003366;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  padding: 0;
 }
 
-.seminar-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+.card-abstract.clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-right { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+/* .card-right a { width: 100%; display: block; } */
+.speaker-photo { margin-top: 25%; width: 100%; max-width: 220px; height: auto; border-radius: 10px; object-fit: cover; }
+.card-speaker { text-align: center; font-size: 13px; color: #4b5563}
+.card-right .youtube-cta {
+  text-align: center;
+  width: 25px;
 }
 
 .seminar-card h3 {
   font-size: 16px;
   margin: 0 0 4px;
-}
-
-.seminar-card p {
-  font-size: 14px;
-  margin: 2px 0;
-}
-
-.seminar-card img {
-  margin-left: auto;
 }
 
 .speaker-photo {
@@ -421,6 +432,7 @@ footer {
   main {
     grid-template-columns: repeat(2, 1fr);
     padding: 20px;
+    gap: 20%;
   }
 
   /* CARDS */
@@ -490,6 +502,8 @@ footer {
     gap: 10px;
   }
 
+  .card-right { align-items: flex-start; width: 100%; }
+
   .seminar-card img {
     order: -1;
     margin-left: 0;
@@ -500,6 +514,7 @@ footer {
     height: 72px;
   }
 }
+
 @media (max-width: 420px) {
 
   .featured-title {
